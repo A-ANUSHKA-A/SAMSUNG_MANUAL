@@ -384,7 +384,7 @@ with st.sidebar:
 
     st.success("Gemini 2.0 Flash")
 
-    st.success("Google Embedding-001")
+    st.success("Gemini Embedding-001")
 
     st.success("ChromaDB")
 
@@ -477,9 +477,9 @@ def initialize_rag(api_key):
     # Embeddings
     # -----------------------------
     embeddings = GoogleGenerativeAIEmbeddings(
-    model="models/embedding-001",
+    model="models/gemini-embedding-001",
     google_api_key=api_key
-    )
+)
 
     # -----------------------------
     # Vector Database
