@@ -319,6 +319,9 @@ unsafe_allow_html=True)
 # HERO
 # ---------------------------------------------------
 
+st.markdown("""
+<div class="hero">
+
 <h1>
 🤖 Samsung AI Copilot
 </h1>
@@ -338,6 +341,11 @@ font-size:18px;
 🔎 Semantic Search Active  
 &nbsp;&nbsp;•&nbsp;&nbsp;
 ⚡ AI Ready
+
+</div>
+
+</div>
+""", unsafe_allow_html=True)
 
 </div>
 # ---------------------------------------------------
