@@ -5,7 +5,10 @@ import time
 from langchain_community.document_loaders import BSHTMLLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_chroma import Chroma
-from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from langchain_google_genai import (
+    ChatGoogleGenerativeAI,
+    GoogleGenerativeAIEmbeddings
+)
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 
@@ -372,21 +375,16 @@ with st.sidebar:
 
     st.title("⚙️ Control Panel")
 
-    api_key = st.secrets.get("OPENAI_API_KEY", "")
+    api_key = st.secrets.get("GOOGLE_API_KEY", "")
 
-    if not api_key:
-        api_key = st.text_input(
-            "OpenAI API Key",
-            type="password"
-        )
 
     st.divider()
 
     st.subheader("📊 Models")
 
-    st.success("GPT-4o-mini")
+    st.success("Gemini 2.0 Flash")
 
-    st.success("text-embedding-3-small")
+    st.success("Google Embedding-001")
 
     st.success("ChromaDB")
 
@@ -478,9 +476,9 @@ def initialize_rag(api_key):
     # -----------------------------
     # Embeddings
     # -----------------------------
-    embeddings = OpenAIEmbeddings(
-        model="text-embedding-3-small",
-        openai_api_key=api_key
+    embeddings = GoogleGenerativeAIEmbeddings(
+    model="models/embedding-001",
+    google_api_key=api_key
     )
 
     # -----------------------------
@@ -498,10 +496,10 @@ def initialize_rag(api_key):
     # -----------------------------
     # LLM
     # -----------------------------
-    llm = ChatOpenAI(
-        model="gpt-4o-mini",
-        temperature=0,
-        openai_api_key=api_key
+    llm = ChatGoogleGenerativeAI(
+    model="gemini-2.0-flash",
+    temperature=0,
+    google_api_key=api_key
     )
 
     # -----------------------------
@@ -555,7 +553,7 @@ if not st.session_state.ready:
 
     if not api_key:
 
-        st.warning("Please enter your OpenAI API Key.")
+        st.warning("Gemini API Key is not configured. Add GOOGLE_API_KEY in Streamlit Secrets.")
 
         st.stop()
 
@@ -633,7 +631,7 @@ st.markdown("""
 
 <tr>
 <td>🤖 Language Model</td>
-<td>✅ GPT-4o-mini</td>
+<td>✅ Gemini 2.0 Flash</td>
 </tr>
 
 
@@ -806,7 +804,7 @@ unsafe_allow_html=True
 
             col3.metric(
                 "Model",
-                "GPT-4o-mini"
+                "Gemini 2.0 Flash"
             )
 
         except Exception as e:
@@ -911,7 +909,7 @@ with col3:
         """
 ### LLM
 
-GPT-4o-mini
+Gemini 2.0 Flash
 """
     )
 
@@ -942,7 +940,7 @@ Built with:
 
 &nbsp;|&nbsp;
 
-🧠 OpenAI
+⚡ Google Gemini 
 
 &nbsp;|&nbsp;
 
