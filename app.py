@@ -382,7 +382,7 @@ with st.sidebar:
 
     st.subheader("📊 Models")
 
-    st.success("Gemini 1.5 Flash")
+    st.success("Gemini 2.5 Flash")
 
     st.success("Gemini Embedding-001")
 
@@ -497,7 +497,7 @@ def initialize_rag(api_key):
     # LLM
     # -----------------------------
     llm = ChatGoogleGenerativeAI(
-    model="gemini-1.5-flash",
+    model="gemini-2.5-flash",
     temperature=0,
     google_api_key=api_key
     )
@@ -631,7 +631,7 @@ st.markdown("""
 
 <tr>
 <td>🤖 Language Model</td>
-<td>✅ Gemini 1.5 Flash</td>
+<td>✅ Gemini 2.5 Flash</td>
 </tr>
 
 
@@ -804,7 +804,7 @@ unsafe_allow_html=True
 
             col3.metric(
                 "Model",
-                "Gemini 1.5 Flash"
+                "Gemini 2.5 Flash"
             )
 
         except Exception as e:
@@ -909,7 +909,7 @@ with col3:
         """
 ### LLM
 
-Gemini 1.5 Flash
+Gemini 2.5 Flash
 """
     )
 
