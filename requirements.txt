@@ -7,3 +7,4 @@ langchain-chroma
 chromadb
 beautifulsoup4
 google-generativeai
+google-genai
