@@ -1,3 +1,5 @@
+from langchain_core.runnables import RunnablePassthrough
+from langchain_core.output_parsers import StrOutputParser
 import streamlit as st
 import os
 import time
@@ -493,14 +495,15 @@ def initialize_rag(api_key):
         search_kwargs={"k":4}
     )
 
-    # -----------------------------
+        # -----------------------------
     # LLM
     # -----------------------------
     llm = ChatGoogleGenerativeAI(
-    model="gemini-flash-latest",
-    temperature=0,
-    google_api_key=api_key
+        model="gemini-flash-latest",
+        temperature=0,
+        google_api_key=api_key
     )
+
 
     # -----------------------------
     # Prompt
@@ -528,33 +531,39 @@ Answer:
 """
     )
 
-    from langchain_core.runnables import RunnablePassthrough
-from langchain_core.output_parsers import StrOutputParser
+
+    # -----------------------------
+    # Format Retrieved Documents
+    # -----------------------------
+    def format_docs(docs):
+        return "\n\n".join(
+            doc.page_content for doc in docs
+        )
 
 
-def format_docs(docs):
-    return "\n\n".join(
-        doc.page_content for doc in docs
+    # -----------------------------
+    # RAG Chain
+    # -----------------------------
+    rag_chain = (
+        {
+            "context": retriever | format_docs,
+            "question": RunnablePassthrough()
+        }
+        | prompt
+        | llm
+        | StrOutputParser()
     )
 
 
-rag_chain = (
-    {
-        "context": retriever | format_docs,
-        "question": RunnablePassthrough()
-    }
-    | prompt
-    | llm
-    | StrOutputParser()
-)
-
+    # -----------------------------
+    # Return Components
+    # -----------------------------
     return (
         vectorstore,
         retriever,
         rag_chain,
         len(chunks)
     )
-
 
 # ==========================================================
 # INITIALIZE
