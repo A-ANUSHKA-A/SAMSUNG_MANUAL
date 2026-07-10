@@ -497,7 +497,7 @@ def initialize_rag(api_key):
     # LLM
     # -----------------------------
     llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",
+    model="gemini-flash-latest",
     temperature=0,
     google_api_key=api_key
     )
