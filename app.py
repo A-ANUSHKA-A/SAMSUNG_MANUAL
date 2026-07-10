@@ -528,14 +528,25 @@ Answer:
 """
     )
 
-    rag_chain = (
-        {
-            "context": retriever,
-            "question": RunnablePassthrough()
-        }
-        | prompt
-        | llm
+    from langchain_core.runnables import RunnablePassthrough
+from langchain_core.output_parsers import StrOutputParser
+
+
+def format_docs(docs):
+    return "\n\n".join(
+        doc.page_content for doc in docs
     )
+
+
+rag_chain = (
+    {
+        "context": retriever | format_docs,
+        "question": RunnablePassthrough()
+    }
+    | prompt
+    | llm
+    | StrOutputParser()
+)
 
     return (
         vectorstore,
@@ -730,12 +741,7 @@ unsafe_allow_html=True
             )
 
             # Generate response
-            answer = st.session_state.chain.invoke(question)
-
-            if hasattr(answer, "content"):
-                response = answer.content
-            else:
-                response = str(answer)
+            response = st.session_state.chain.invoke(question)
 
             thinking.empty()
 
