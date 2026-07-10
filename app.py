@@ -27,113 +27,319 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-#MainMenu{visibility:hidden;}
-footer{visibility:hidden;}
-header{visibility:hidden;}
+#MainMenu{
+visibility:hidden;
+}
+
+footer{
+visibility:hidden;
+}
+
+header{
+visibility:hidden;
+}
+
+
+/* APP BACKGROUND */
 
 .stApp{
-background:#0d1117;
+
+background:
+radial-gradient(circle at top left,#172554,#020617 40%);
+
+color:white;
+
 }
+
+
+/* HERO */
 
 .hero{
-padding:35px;
-border-radius:22px;
-background:linear-gradient(135deg,#1e3c72,#2a5298,#6a11cb);
+
+padding:45px;
+
+border-radius:30px;
+
+background:
+linear-gradient(
+135deg,
+rgba(30,64,175,.9),
+rgba(124,58,237,.9),
+rgba(14,165,233,.9)
+);
+
 text-align:center;
-margin-bottom:25px;
-box-shadow:0 12px 30px rgba(0,0,0,.35);
+
+box-shadow:
+0 20px 50px rgba(0,0,0,.5);
+
+animation:
+fadeIn 1s ease-in-out;
+
 }
+
 
 .hero h1{
-color:white;
-font-size:54px;
-font-weight:800;
-margin-bottom:8px;
+
+font-size:60px;
+
+font-weight:900;
+
+letter-spacing:-2px;
+
+background:
+linear-gradient(
+90deg,
+#ffffff,
+#bae6fd
+);
+
+-webkit-background-clip:text;
+
+color:transparent;
+
 }
 
+
 .hero p{
-color:#ECECEC;
-font-size:20px;
+
+font-size:22px;
+
+color:#e0f2fe;
+
 }
+
+
+
+/* CARDS */
+
 
 .card{
 
-background:#161b22;
+background:
+rgba(255,255,255,.08);
 
-padding:22px;
+backdrop-filter:
+blur(15px);
 
-border-radius:18px;
+padding:25px;
 
-border:1px solid #30363d;
+border-radius:25px;
 
-margin-bottom:20px;
+border:
 
-}
+1px solid rgba(255,255,255,.15);
 
-.metric-card{
+box-shadow:
 
-background:#202938;
+0 15px 40px rgba(0,0,0,.3);
 
-padding:18px;
-
-border-radius:15px;
-
-text-align:center;
+margin-bottom:25px;
 
 }
 
-.stButton>button{
 
-width:100%;
 
-padding:12px;
+/* CHAT AREA */
 
-border-radius:12px;
 
-background:linear-gradient(90deg,#00c6ff,#0072ff);
+[data-testid="stChatMessage"]{
 
-color:white;
+background:
+
+rgba(255,255,255,.06);
+
+border-radius:20px;
+
+padding:10px;
+
+margin-bottom:15px;
+
+}
+
+
+
+/* INPUT */
+
+
+[data-testid="stChatInput"]{
+
+border-radius:20px;
+
+background:#111827;
+
+}
+
+
+
+/* BUTTONS */
+
+
+.stButton button{
+
+
+background:
+
+linear-gradient(
+90deg,
+#06b6d4,
+#2563eb
+);
+
 
 border:none;
 
-font-weight:bold;
+border-radius:15px;
+
+height:50px;
+
+font-weight:700;
 
 font-size:16px;
 
-}
+color:white;
 
-.stButton>button:hover{
 
-transform:scale(1.02);
-
-transition:.2s;
+transition:.3s;
 
 }
 
-hr{
-border:1px solid #333;
+
+.stButton button:hover{
+
+
+transform:
+translateY(-3px)
+scale(1.03);
+
+
+box-shadow:
+
+0 10px 25px rgba(37,99,235,.5);
+
+
 }
+
+
+
+/* METRIC CARDS */
+
+
+[data-testid="metric-container"]{
+
+
+background:
+
+rgba(255,255,255,.08);
+
+
+padding:20px;
+
+border-radius:20px;
+
+
+border:
+
+1px solid rgba(255,255,255,.15);
+
+
+}
+
+
+
+/* SIDEBAR */
+
+
+section[data-testid="stSidebar"]{
+
+
+background:
+
+linear-gradient(
+180deg,
+#020617,
+#111827
+);
+
+
+}
+
+
+
+/* EXPANDER */
+
+
+.streamlit-expanderHeader{
+
+
+background:
+
+rgba(255,255,255,.08);
+
+
+border-radius:15px;
+
+
+}
+
+
+
+/* ANIMATION */
+
+
+@keyframes fadeIn{
+
+
+from{
+
+opacity:0;
+
+transform:
+translateY(20px);
+
+}
+
+
+to{
+
+opacity:1;
+
+transform:
+translateY(0);
+
+}
+
+}
+
 
 </style>
-""", unsafe_allow_html=True)
-
+""",
+unsafe_allow_html=True)
 # ---------------------------------------------------
 # HERO
 # ---------------------------------------------------
 
-st.markdown("""
-<div class="hero">
-
-<h1>🤖 Samsung AI Manual Assistant</h1>
+<h1>
+🤖 Samsung AI Copilot
+</h1>
 
 <p>
-Retrieval-Augmented Generation (RAG)
-powered by OpenAI & LangChain
+Your intelligent washing machine companion powered by RAG,
+LangChain & GPT-4o-mini
 </p>
 
-</div>
-""", unsafe_allow_html=True)
+<div style="
+margin-top:20px;
+font-size:18px;
+">
 
+🟢 Manual Loaded  
+&nbsp;&nbsp;•&nbsp;&nbsp;
+🔎 Semantic Search Active  
+&nbsp;&nbsp;•&nbsp;&nbsp;
+⚡ AI Ready
+
+</div>
 # ---------------------------------------------------
 # SESSION STATE
 # ---------------------------------------------------
@@ -396,6 +602,46 @@ st.success(
 # ==========================================================
 
 st.markdown("---")
+st.markdown("""
+<div class="card">
+
+<h3>
+🧠 AI System Status
+</h3>
+
+
+<table style="width:100%">
+
+<tr>
+<td>📚 Knowledge Base</td>
+<td>✅ Samsung Manual Indexed</td>
+</tr>
+
+
+<tr>
+<td>🔍 Retrieval Engine</td>
+<td>✅ Chroma Vector Search</td>
+</tr>
+
+
+<tr>
+<td>🤖 Language Model</td>
+<td>✅ GPT-4o-mini</td>
+</tr>
+
+
+<tr>
+<td>⚡ Response Mode</td>
+<td>Streaming Enabled</td>
+</tr>
+
+
+</table>
+
+</div>
+
+""",
+unsafe_allow_html=True)
 
 st.markdown(
 """
@@ -451,9 +697,25 @@ if question:
 
         thinking = st.empty()
 
-        thinking.info(
-            "🔍 Searching the manual..."
-        )
+        thinking.markdown(
+"""
+<div class="card">
+
+<h3>
+🤖 Thinking...
+</h3>
+
+<p>
+🔎 Searching Samsung manual<br>
+🧩 Retrieving relevant knowledge<br>
+✨ Generating answer
+
+</p>
+
+</div>
+""",
+unsafe_allow_html=True
+)
 
         try:
 
@@ -651,30 +913,46 @@ GPT-4o-mini
 # Footer
 # ----------------------------
 
-st.markdown("---")
+st.markdown("""
+<div class="hero">
 
-st.markdown(
-"""
-<div style='
-text-align:center;
-padding:25px;
-border-radius:18px;
-background:linear-gradient(90deg,#1e3c72,#2a5298,#6a11cb);
-color:white;
-margin-top:30px;
-'>
+<h2>
+🤖 Samsung AI Copilot
+</h2>
 
-<h2>🤖 Samsung AI Manual Assistant</h2>
 
 <p>
-Powered by Streamlit • LangChain • OpenAI • ChromaDB
+
+Built with:
+
+<br>
+
+🚀 Streamlit
+
+&nbsp;|&nbsp;
+
+🦜 LangChain
+
+&nbsp;|&nbsp;
+
+🧠 OpenAI
+
+&nbsp;|&nbsp;
+
+🗄 ChromaDB
+
+
 </p>
 
+
 <p>
-Built with ❤️ using Retrieval-Augmented Generation (RAG)
+
+Created with ❤️ by ANUSHKA
+
 </p>
+
 
 </div>
+
 """,
-unsafe_allow_html=True
-)
+unsafe_allow_html=True)
